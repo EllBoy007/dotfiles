@@ -30,4 +30,6 @@ $ stow .
 
 ## References
     
-[Stow has forever changed the way I manage my dotfiles](https://www.youtube.com/watch?v=y6XCebnB9gs) via [@dreamsofautonomy](https://www.youtube.com/@dreamsofautonomy) (YouTube)
+1. [GNU Stow](https://www.gnu.org/software/stow/)
+2. [Stow has forever changed the way I manage my dotfiles](https://www.youtube.com/watch?v=y6XCebnB9gs) via [@dreamsofautonomy](https://www.youtube.com/@dreamsofautonomy) (YouTube)
+
