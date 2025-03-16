@@ -84,3 +84,6 @@ alias ls="eza --icons=always -1 -l --color=always --all --group-directories-firs
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 alias cd="z"
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
