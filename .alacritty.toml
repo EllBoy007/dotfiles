@@ -1,0 +1,17 @@
+[window]
+padding.x = 10
+padding.y = 10
+dimensions.columns = 160
+dimensions.lines = 50
+
+decorations = "Buttonless"
+
+opacity = 0.8
+blur = true
+
+option_as_alt = "Both"
+
+[font]
+normal.family = "Lekton Nerd Font Mono"
+
+size = 18
