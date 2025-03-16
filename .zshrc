@@ -49,7 +49,7 @@ autoload -Uz compinit && compinit
 
 # Load oh-my-posh prompt
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config $HOME/.ohmyposh.toml)"
+  eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/.ohmyposh.toml)"
 fi
 
 # Keybindings
