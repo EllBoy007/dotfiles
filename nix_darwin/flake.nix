@@ -17,23 +17,53 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
-        [ pkgs.neovim
-          pkgs.tmux
-          pkgs.alacritty
+        [
           pkgs.mkalias
         ];
 
       homebrew = {
         enable = true;
         brews = [
+          "ansible"
+          "awscli"
+          "ca-certificates"
+          "docker-compose"
+          "eza"
+          "git"
+          "gh"
+          "iperf"
+          "jq"
+          "lazygit"
           "mas"
+          "nmap"
+          "oh-my-posh"
+          "pyenv"
+          "stow"
+          "tmux"
+          #"python@3.13"
+          #"python-setuptools"
+          "vsh"
+          "zoxide"
         ];
         casks = [
+          "1password"
+          "1password-cli"
+          "alacritty"
+          "chatgpt"
+          "docker"
+          "firefox"
+          "microsoft-teams"
+          "slack"
+          "visual-studio-code"
+          "warp"
+          "zoom"
         ];
         masApps = {
-          "1Password" = 1511601750;
+          "Microsoft365" = 1450038993;
         };
         #onActivation.cleanup = "zap";
+        onActivation.autoUpdate = true;
+        onActivation.upgrade = true;
       };
 
       fonts.packages = 
@@ -60,6 +90,53 @@
           ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
         done
             '';
+
+      system.defaults = {
+        #dock.autohide = false;
+        dock.persistent-apps = [
+          "${pkgs.alacritty}/Applications/Alacritty.app"
+          "/Applications/Firefox.app"
+          "/Applications/Slack.app"
+          "/Applications/1Password.app"
+          "/Applications/Visual Studio Code.app"
+          "/System/Applications/System Settings.app"
+          "/System/Applications/Notes.app"
+          "/System/Applications/Reminders.app"
+          "/System/Applications/Calendar.app"
+          "/System/Applications/Mail.app"
+          "/Applications/Microsoft Teams.app"
+        ];
+        dock.persistent-others = [
+          "/Users/Ryan/Downloads"
+          "/Applications"
+        ];
+        finder.FXPreferredViewStyle = "Nlsv";
+        finder.AppleShowAllExtensions = true;
+        finder.AppleShowAllFiles = true;
+        finder.FXDefaultSearchScope = "SCcf";
+        finder.NewWindowTarget = "Home";
+        finder.ShowHardDrivesOnDesktop = true;
+        finder.ShowPathbar = true;
+        finder.ShowStatusBar = true;
+        finder._FXSortFoldersFirst = true;
+        menuExtraClock.ShowAMPM = true;
+        menuExtraClock.ShowDate = 1;
+        menuExtraClock.ShowDayOfMonth = true;
+        menuExtraClock.ShowDayOfWeek = true;
+        loginwindow.GuestEnabled = false;
+        NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
+        NSGlobalDomain.AppleShowAllExtensions = true;
+        NSGlobalDomain.AppleShowAllFiles = true;
+        NSGlobalDomain.AppleShowScrollBars = "WhenScrolling";
+        NSGlobalDomain.NSAutomaticWindowAnimationsEnabled = false;
+        NSGlobalDomain."com.apple.trackpad.forceClick" = true;
+        NSGlobalDomain."com.apple.swipescrolldirection" = null;
+        controlcenter.BatteryShowPercentage = true;
+        controlcenter.Sound = true;
+        dock.mineffect = "scale";
+        dock.minimize-to-application = true;
+        dock.show-recents = false;
+      };
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
