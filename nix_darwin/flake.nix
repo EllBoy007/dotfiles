@@ -172,5 +172,20 @@
         }
         configuration ];
     };
+
+    darwinConfigurations."macbookpro" = nix-darwin.lib.darwinSystem {
+      modules = [
+        nix-homebrew.darwinModules.nix-homebrew 
+        {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = true;
+            user = "ryan";
+
+            autoMigrate = true;
+          };
+        }
+        configuration ];
+    };
   };
 }
