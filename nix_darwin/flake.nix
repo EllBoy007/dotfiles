@@ -29,6 +29,7 @@
           "ca-certificates"
           "docker-compose"
           "eza"
+          "fzf"
           "git"
           "gh"
           "iperf"
