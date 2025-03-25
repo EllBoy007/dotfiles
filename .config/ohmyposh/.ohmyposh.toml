@@ -42,6 +42,28 @@ final_space = true
 
     [blocks.segments.properties]
       threshold = 5000
+    
+  [[blocks.segments]]
+    type = "python"
+    style = "plain"
+    foreground = "cyan"
+    background = "transparent"
+    template = " ( {{ .Venv }})"
+
+    [blocks.segments.properties]
+      display_mode = "context"
+      fetch_virtual_env = true
+
+  [[blocks.segments]]
+    type = "aws"
+    style = "plain"
+    foreground = "#FF9900"
+    background = "transparent"
+    template = "  ( {{ .Profile }})"
+
+    [blocks.segments.properties]
+      display_default = true     # hides it if using 'default'
+      profile_template = "{{ .Profile }}"
 
 [[blocks]]
   type = 'prompt'

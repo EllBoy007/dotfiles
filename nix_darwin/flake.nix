@@ -44,9 +44,11 @@
           #"python@3.13"
           #"python-setuptools"
           "vsh"
+          "yq"
           "zoxide"
         ];
         casks = [
+          "aws-vault"
           "1password"
           "1password-cli"
           "alacritty"
@@ -54,6 +56,9 @@
           "docker"
           "firefox"
           "microsoft-teams"
+          "pgadmin4"
+          "powershell"
+          "session-manager-plugin"
           "slack"
           "visual-studio-code"
           "warp"
@@ -61,10 +66,13 @@
         ];
         masApps = {
           "Microsoft365" = 1450038993;
+          "Microsoft Word" = 462054704;
+          "Microsoft Excel" = 586683407;
+          "Microsoft Outlook" = 951937596;
         };
         #onActivation.cleanup = "zap";
-        onActivation.autoUpdate = true;
-        onActivation.upgrade = true;
+        onActivation.autoUpdate = false;
+        onActivation.upgrade = false;
       };
 
       fonts.packages = 
@@ -178,13 +186,13 @@
       modules = [
         nix-homebrew.darwinModules.nix-homebrew 
         {
-          nix-homebrew = {
-            enable = true;
-            enableRosetta = true;
-            user = "ryan";
+          # nix-homebrew = {
+          #   enable = true;
+          #   enableRosetta = true;
+          #   user = "ryan";
 
-            autoMigrate = true;
-          };
+          #   autoMigrate = true;
+          # };
         }
         configuration ];
     };

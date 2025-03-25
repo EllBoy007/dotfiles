@@ -78,12 +78,16 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# ---- Eza (better ls) -----
+# # ---- Eza (better ls) -----
 alias ls="eza --icons=always -1 -l --color=always --all --group-directories-first --sort=modified --reverse"
 
-# ---- Zoxide (better cd) ----
+# # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 alias cd="z"
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+plugins=(git virtualenv)
