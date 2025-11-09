@@ -124,7 +124,7 @@ build_powerline_prompt() {
 }
 
 build_simple_prompt() {
-  local segments=() text git_text separator='%F{240}❯%f'
+  local segments=() text git_text separator='%F{81}▶%f'
 
   if should_show_identity; then
     segments+=("%F{33}%n@%m%f")
