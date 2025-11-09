@@ -1,9 +1,10 @@
 {
     "workbench.colorTheme": "Default Dark+",
-    "editor.fontFamily": "'Liga SFMono Nerd Font Regular', 'SFMono Nerd Font', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "'SF Mono', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.fontSize": 18,
-    "terminal.integrated.fontFamily": "'Liga SFMono Nerd Font Regular', 'SFMono Nerd Font', 'SF Mono', Menlo, monospace",
+    "terminal.integrated.fontFamily": "'SF Mono', Menlo, monospace",
     "terminal.integrated.fontSize": 18,
-    "terminal.integrated.gpuAcceleration": "canvas"
+    "terminal.integrated.gpuAcceleration": "canvas",
+    "window.zoomLevel": 1
 }
