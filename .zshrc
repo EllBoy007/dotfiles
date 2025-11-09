@@ -44,6 +44,10 @@ GITHUB_ICON=$'\uF09B'
 PUSH_ICON=$'⇡'
 PULL_ICON=$'⇣'
 
+if [[ "${TERM_PROGRAM:-}" == "vscode" ]]; then
+  GITHUB_ICON=""
+fi
+
 prompt_segment() {
   local bg="$1" fg="$2" text="$3"
   printf "%s%s %s%s" "%{$bg%}" "%{$fg%}" "$text" "%{$reset_color%}"
@@ -70,7 +74,11 @@ git_prompt_text() {
     fi
   fi
 
-  text="$GITHUB_ICON $branch"
+  if [[ -n "$GITHUB_ICON" ]]; then
+    text="$GITHUB_ICON $branch"
+  else
+    text="$branch"
+  fi
   [[ -n "$arrows" ]] && text+=" $arrows"
   printf "%s" "$text"
   return 0
