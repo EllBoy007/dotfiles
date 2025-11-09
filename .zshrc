@@ -107,7 +107,7 @@ build_prompt() {
 
 PROMPT='$(build_prompt) %# '
 
-# ls defaults
+# ls defaults 
 export CLICOLOR=1        # tell BSD/macOS ls to use color
 export LSCOLORS=GxFxCxDxBxegedabagaced  # optional palette tweak
 alias ls='ls -laG'       # -G forces color while keeping your defaults
