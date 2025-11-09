@@ -100,7 +100,7 @@ should_show_identity() {
   current_host="${current_host%%.*}"
   [[ -z "$current_host" ]] && current_host=$(hostname -s 2>/dev/null)
 
-  if [[ "$current_user" == "ryan" && "$current_host" == "MacBookAir" ]]; then
+  if [[ "$current_user" == "ryan" ]]; then
     return 1
   fi
   return 0
