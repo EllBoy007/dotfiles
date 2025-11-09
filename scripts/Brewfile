@@ -1,0 +1,8 @@
+brew "gh"
+
+cask "visual-studio-code"
+cask "github"
+cask "1password"
+cask "chatgpt"
+cask "font-caskaydia-cove-nerd-font"
+cask "font-sf-mono-nerd-font-ligaturized"

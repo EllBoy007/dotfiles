@@ -179,7 +179,7 @@ promptstyle() {
   fi
 }
 
-PROMPT='$(build_prompt) %# '
+PROMPT='$(build_prompt) %B>%b '
 
 # ls defaults 
 export CLICOLOR=1        # tell BSD/macOS ls to use color
