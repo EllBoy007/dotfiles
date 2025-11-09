@@ -38,7 +38,7 @@ setopt prompt_subst
 autoload -U colors && colors  # gives $fg[...] vars
 POWERLINE_LEFT=$'\uE0B0'
 SIMPLE_ARROW=$'›'
-PROMPT_STYLE="${PROMPT_STYLE:-powerline}"
+PROMPT_STYLE="${PROMPT_STYLE:-simple}"
 PROMPT_LAST_ARROW_COLOR="%{$fg[magenta]%}"
 GITHUB_ICON=$'\uF09B'
 PUSH_ICON=$'⇡'
@@ -124,7 +124,7 @@ build_powerline_prompt() {
 }
 
 build_simple_prompt() {
-  local segments=() arrow=" %F{244}$SIMPLE_ARROW%f " text
+  local segments=() text git_text
 
   if should_show_identity; then
     segments+=("%F{33}%n@%m%f")
@@ -132,16 +132,16 @@ build_simple_prompt() {
 
   segments+=("%F{213}%~%f")
 
-  if text=$(git_prompt_text); then
-    segments+=("%F{40}$text%f")
+  if git_text=$(git_prompt_text); then
+    segments+=("%F{40}$git_text%f")
   fi
 
-  local prompt_text=""
-  if ((${#segments[@]})); then
-    prompt_text="${segments[0]}"
+  local prompt_text="" count=${#segments[@]}
+  if (( count > 0 )); then
+    prompt_text="${segments[1]}"
     local i
-    for ((i=1; i<${#segments[@]}; i++)); do
-      prompt_text+="$arrow${segments[i]}"
+    for (( i=2; i<=count; i++ )); do
+      prompt_text+=" ${segments[i]}"
     done
   fi
   printf "%s" "$prompt_text"
