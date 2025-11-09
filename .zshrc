@@ -37,6 +37,8 @@ setopt appendhistory sharehistory \
 setopt prompt_subst
 autoload -U colors && colors  # gives $fg[...] vars
 POWERLINE_LEFT=$'\uE0B0'
+SIMPLE_ARROW=$'›'
+PROMPT_STYLE="${PROMPT_STYLE:-powerline}"
 PROMPT_LAST_ARROW_COLOR="%{$fg[magenta]%}"
 GITHUB_ICON=$'\uF09B'
 PUSH_ICON=$'⇡'
@@ -47,12 +49,9 @@ prompt_segment() {
   printf "%s%s %s%s" "%{$bg%}" "%{$fg%}" "$text" "%{$reset_color%}"
 }
 
-prompt_git() {
+git_prompt_text() {
   local branch status_ab ahead_token behind_token ahead behind arrows text
-  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || { PROMPT_GIT_SEGMENT=""; return 1; }
-  PROMPT_GIT_SEGMENT=""
-  PROMPT_GIT_SEGMENT+="%{$bg[green]%}%{$fg[magenta]%}$POWERLINE_LEFT%{$reset_color%}"
-
+  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return 1
   status_ab=$(git status --porcelain=2 --branch 2>/dev/null | grep '^# branch.ab' | head -n1)
   if [[ -n "$status_ab" ]]; then
     IFS=' ' read -r _ _ ahead_token behind_token <<< "$status_ab"
@@ -73,19 +72,38 @@ prompt_git() {
 
   text="$GITHUB_ICON $branch"
   [[ -n "$arrows" ]] && text+=" $arrows"
+  printf "%s" "$text"
+  return 0
+}
+
+prompt_git() {
+  local text
+  text=$(git_prompt_text) || { PROMPT_GIT_SEGMENT=""; return 1; }
+  PROMPT_GIT_SEGMENT=""
+  PROMPT_GIT_SEGMENT+="%{$bg[green]%}%{$fg[magenta]%}$POWERLINE_LEFT%{$reset_color%}"
   PROMPT_GIT_SEGMENT+=$(prompt_segment $bg[green] $fg[black] "$text")
   PROMPT_LAST_ARROW_COLOR="%{$fg[green]%}"
   return 0
 }
 
-build_prompt() {
-  local prompt_text="" show_identity=1
+should_show_identity() {
   local current_user="${USER:-}"
   local current_host="${HOST:-}"
   current_host="${current_host%%.*}"
   [[ -z "$current_host" ]] && current_host=$(hostname -s 2>/dev/null)
 
   if [[ "$current_user" == "ryan" && "$current_host" == "MacBookAir" ]]; then
+    return 1
+  fi
+  return 0
+}
+
+build_powerline_prompt() {
+  local prompt_text="" show_identity=1
+
+  if should_show_identity; then
+    show_identity=1
+  else
     show_identity=0
   fi
 
@@ -103,6 +121,53 @@ build_prompt() {
 
   prompt_text+="${PROMPT_LAST_ARROW_COLOR}$POWERLINE_LEFT%{$reset_color%}"
   printf "%s" "$prompt_text"
+}
+
+build_simple_prompt() {
+  local segments=() arrow=" %F{244}$SIMPLE_ARROW%f " text
+
+  if should_show_identity; then
+    segments+=("%F{33}%n@%m%f")
+  fi
+
+  segments+=("%F{213}%~%f")
+
+  if text=$(git_prompt_text); then
+    segments+=("%F{40}$text%f")
+  fi
+
+  local prompt_text=""
+  if ((${#segments[@]})); then
+    prompt_text="${segments[0]}"
+    local i
+    for ((i=1; i<${#segments[@]}; i++)); do
+      prompt_text+="$arrow${segments[i]}"
+    done
+  fi
+  printf "%s" "$prompt_text"
+}
+
+build_prompt() {
+  case "$PROMPT_STYLE" in
+    simple)
+      build_simple_prompt
+      ;;
+    *)
+      build_powerline_prompt
+      ;;
+  esac
+}
+
+promptstyle() {
+  local style="$1"
+  if [[ "$style" != "simple" && "$style" != "powerline" ]]; then
+    echo "Usage: promptstyle [powerline|simple]"
+    return 1
+  fi
+  PROMPT_STYLE="$style"
+  if [[ -o interactive ]]; then
+    zle reset-prompt 2>/dev/null
+  fi
 }
 
 PROMPT='$(build_prompt) %# '
