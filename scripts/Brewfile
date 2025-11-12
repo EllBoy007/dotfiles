@@ -1,8 +1,11 @@
 brew "gh"
+brew "awscli"
+brew "aws-cdk"
 
 cask "visual-studio-code"
 cask "github"
 cask "1password"
 cask "chatgpt"
+cask "ollama-app"
 cask "font-caskaydia-cove-nerd-font"
 cask "font-sf-mono-nerd-font-ligaturized"

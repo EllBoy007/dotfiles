@@ -4,7 +4,7 @@ install_base_packages() {
   log "Updating apt indices..."
   sudo apt-get update -y
   log "Installing base packages (curl, wget, gpg, unzip)..."
-  sudo apt-get install -y curl wget gpg unzip apt-transport-https ca-certificates lsb-release fontconfig
+  sudo apt-get install -y curl wget gpg unzip ca-certificates lsb-release fontconfig
 }
 
 ensure_repo() {
