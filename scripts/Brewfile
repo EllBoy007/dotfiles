@@ -1,6 +1,10 @@
 brew "gh"
 brew "awscli"
 brew "aws-cdk"
+brew "python@3.11"
+brew "python@3.12"
+brew "python@3.13"
+brew "python@3.14"
 
 cask "visual-studio-code"
 cask "github"
@@ -9,3 +13,4 @@ cask "chatgpt"
 cask "ollama-app"
 cask "font-caskaydia-cove-nerd-font"
 cask "font-sf-mono-nerd-font-ligaturized"
+
