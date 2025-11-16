@@ -9,5 +9,19 @@
     "terminal.integrated.letterSpacing": 1,
     "window.zoomLevel": 0.68,
     "editor.letterSpacing": 0.75,
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "git.autofetch": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "makefile.configureOnOpen": true,
+    "files.exclude": {
+        ".mypy_cache": true,
+        ".pytest_cache": true,
+        ".ruff_cache": true,
+        ".venv": true,
+        "build": true,
+        "dist": true,
+        ".coverage": true,
+        "**/__pycache__": true,
+        "**/*.egg-info": true
+    }
 }
