@@ -2,7 +2,7 @@
 OS="$(uname -s)"
 case "$OS" in
   Darwin)
-    export PATH="$PATH:/Users/ryan/Library/Python/3.9/bin"
+    export PATH="/opt/homebrew/bin:$PATH:/Users/ryan/Library/Python/3.9/bin"
     export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
     ;;
   Linux)
@@ -176,9 +176,38 @@ promptstyle() {
   fi
 }
 
+# Python virtual environment detection for right prompt
+python_venv_info() {
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    local venv_name=$(basename "$VIRTUAL_ENV")
+    local display_name="$venv_name"
+    local python_icon=""
+    
+    # If venv name is ".venv", show the parent directory name instead
+    if [[ "$venv_name" == ".venv" ]]; then
+      display_name=$(basename "$(dirname "$VIRTUAL_ENV")")
+    fi
+    
+    # Add Python symbol for powerline style (using simple py: prefix if icon doesn't work)
+    if [[ "$PROMPT_STYLE" == "powerline" ]]; then
+      python_icon="py: "  # Simple text prefix instead of Unicode icon
+    fi
+    
+    printf "%s" "%F{cyan}${python_icon}(${display_name})%f"
+  fi
+}
+
+# Disable virtual environment prompt modification
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 PROMPT='$(build_prompt) %B>%b '
+RPROMPT='$(python_venv_info)'
 
 # ls defaults 
 export CLICOLOR=1        # tell BSD/macOS ls to use color
 export LSCOLORS=GxFxCxDxBxegedabagaced  # optional palette tweak
 alias ls='ls -laG'       # -G forces color while keeping your defaults
+alias pi='/opt/homebrew/bin/python3.12 -m venv .venv && source .venv/bin/activate'
+alias pu='deactivate 2>/dev/null; rm -rf .venv'
+alias pa='source .venv/bin/activate'
+alias pd='deactivate'

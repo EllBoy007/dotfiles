@@ -11,6 +11,7 @@ cask "github"
 cask "1password"
 cask "chatgpt"
 cask "ollama-app"
+cask "utm"
 cask "font-caskaydia-cove-nerd-font"
 cask "font-sf-mono-nerd-font-ligaturized"
 

@@ -23,5 +23,8 @@
         ".coverage": true,
         "**/__pycache__": true,
         "**/*.egg-info": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }
